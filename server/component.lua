@@ -30,6 +30,7 @@ function RetrieveComponents()
 	Vehicles = exports['mythic-base']:FetchComponent('Vehicles')
     Inventory = exports['mythic-base']:FetchComponent('Inventory')
     Sequence = exports['mythic-base']:FetchComponent('Sequence')
+    Version = exports['mythic-base']:FetchComponent('Version')
 end
 
 AddEventHandler('Core:Shared:Ready', function()
@@ -48,6 +49,7 @@ AddEventHandler('Core:Shared:Ready', function()
 		'Vehicles',
         'Inventory',
         'Sequence',
+        'Version',
 	}, function(error)
 		if #error > 0 then 
             exports['mythic-base']:FetchComponent('Logger'):Critical('Evidence', 'Failed To Load All Dependencies')
@@ -63,6 +65,8 @@ AddEventHandler('Core:Shared:Ready', function()
 
         RegisterBallisticsCallbacks()
         RegisterBallisticsItemUses()
+
+		Version:Check('Mythic-Framework/Mythic-VersionCheckers', GetCurrentResourceName())
 	end)
 end)
 
